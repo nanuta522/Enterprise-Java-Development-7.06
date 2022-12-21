@@ -1,47 +1,71 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+    <Navbar />
   </header>
 
   <main>
-    <TheWelcome />
+    <MathOperation :numbers="numbers" />
+
+    <ImageComponent />
+
+    <div class="container mt-5">
+      <div class="row g-3">
+        <div class="col-auto">
+          <label for="inputOperation" class="col-form-label"><strong>Iteration 4</strong></label>
+        </div>
+
+        <CardComponent v-for="(card, idx) in cards" :card="card" :key="idx" />
+      </div>
+    </div>
+
+    <BonusComponent />
   </main>
+
+  <footer>
+    <FooterComponent />
+  </footer>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import Navbar from './components/NavBar.vue'
+import FooterComponent from './components/FooterComponent.vue'
+import MathOperation from './components/MathOperation.vue'
+import ImageComponent from './components/ImageComponent.vue'
+import CardComponent from './components/CardComponent.vue'
+import BonusComponent from './components/BonusComponent.vue'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+export default {
+  data() {
+    return {
+      numbers: [5, 5, 2],
+      cards: [{
+        title: 'Title 1',
+        description: 'Lorem, ipsum.',
+        content: 'Lorem ipsum dolor sit amet.'
+      },
+      {
+        title: 'Title 2',
+        description: 'Quas, fugiat.',
+        content: 'Veritatis perferendis omnis exercitationem explicabo!'
+      },
+      {
+        title: 'Title 3',
+        description: 'Assumenda, dolorum.',
+        content: 'Modi incidunt neque nostrum pariatur.'
+      }]
+    }
+  },
+  components: {
+    Navbar,
+    FooterComponent,
+    MathOperation,
+    ImageComponent,
+    CardComponent,
+    BonusComponent
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 }
+</script>
+
+<style>
+
 </style>
